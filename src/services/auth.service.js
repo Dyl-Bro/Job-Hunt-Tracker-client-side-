@@ -3,7 +3,7 @@ import axios from "axios";
 const register = async (body) => {
   console.log("userData in final register function" + JSON.stringify(body));
   const response = await axios.post(
-    "http://localhost:4000/api/v1/accounts/register",
+    "https://api.jobhunttracker.live/api/v1/accounts/register",
     body
   );
   if (response.data) {
@@ -13,7 +13,7 @@ const register = async (body) => {
 };
 const login = async (body) => {
   const response = await axios.post(
-    "http://localhost:4000/api/v1/accounts/login",
+    "https://api.jobhunttracker.live/api/v1/accounts/login",
     body
   );
   if (response.data) {

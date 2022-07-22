@@ -5,7 +5,7 @@ const app_id = localStorage.getItem("AppID");
 
 const getAll = async () => {
   const result = await axios
-    .get("http://localhost:4000/api/v1/interviews/", {
+    .get("https://api.jobhunttracker.live/api/v1/interviews/", {
       withCredentials: true,
     })
     .catch((error) => {
@@ -18,7 +18,7 @@ const getAll = async () => {
 const post = async (data) => {
   const appID = localStorage.getItem("AppID");
   const result = await axios
-    .post(`http://localhost:4000/api/v1/interviews/${appID}`, data, {
+    .post(`https://api.jobhunttracker.live/api/v1/interviews/${appID}`, data, {
       withCredentials: true,
     })
     .catch((error) => {
@@ -31,7 +31,7 @@ const post = async (data) => {
 const deleteInterview = async () => {
   const id = localStorage.getItem("Interview ID");
   const result = await axios
-    .delete(`http://localhost:4000/api/v1/interviews/${id}`, {
+    .delete(`https://api.jobhunttracker.live/api/v1/interviews/${id}`, {
       withCredentials: true,
     })
     .catch((error) => {
@@ -44,9 +44,13 @@ const deleteInterview = async () => {
 const update = async (data) => {
   const interview_id = localStorage.getItem("interviewID");
   const result = await axios
-    .put(`http://localhost:4000/api/v1/interviews/${interview_id}`, data, {
-      withCredentials: true,
-    })
+    .put(
+      `https://api.jobhunttracker.live/api/v1/interviews/${interview_id}`,
+      data,
+      {
+        withCredentials: true,
+      }
+    )
     .catch((error) => {
       console.log(error);
     });

@@ -5,7 +5,7 @@ const app_id = localStorage.getItem("Application to be Updated");
 
 const getAll = async () => {
   const result = await axios
-    .get("http://localhost:4000/api/v1/applications/", {
+    .get("https://api.jobhunttracker.live/api/v1/applications/", {
       withCredentials: true,
     })
     .catch((error) => {
@@ -17,7 +17,7 @@ const getAll = async () => {
 
 const post = async (data) => {
   const result = await axios
-    .post("http://localhost:4000/api/v1/applications/", data, {
+    .post("https://api.jobhunttracker.live/api/v1/applications/", data, {
       withCredentials: true,
     })
     .catch((error) => {
@@ -29,7 +29,7 @@ const post = async (data) => {
 const deleteApp = async () => {
   const id = localStorage.getItem("Application to be Updated");
   const result = await axios
-    .delete(`http://localhost:4000/api/v1/applications/${id}`, {
+    .delete(`https://api.jobhunttracker.live/api/v1/applications/${id}`, {
       withCredentials: true,
     })
     .catch((error) => {
@@ -42,9 +42,13 @@ const deleteApp = async () => {
 const update = async (data) => {
   const app_id = localStorage.getItem("Application to be Updated");
   const result = await axios
-    .put(`http://localhost:4000/api/v1/applications/${app_id}`, data, {
-      withCredentials: true,
-    })
+    .put(
+      `https://api.jobhunttracker.live/api/v1/applications/${app_id}`,
+      data,
+      {
+        withCredentials: true,
+      }
+    )
     .catch((error) => {
       console.log(error);
     });

@@ -14,7 +14,7 @@ function NavBar() {
 
   async function getUserName() {
     const result = await axios.get(
-      `http://localhost:4000/api/v1/accounts/${userID}`
+      `https://api.jobhunttracker.live/api/v1/accounts/${userID}`
     );
     setName(result.data.first_name);
   }

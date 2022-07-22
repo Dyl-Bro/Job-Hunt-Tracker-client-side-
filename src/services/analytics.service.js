@@ -4,7 +4,7 @@ axios.defaults.withCredentials = true;
 const getBehaviorScore = async () => {
   const result = await axios
     .get(
-      "http://localhost:4000/api/v1/analytics/behavioral-interview-skill-analysis",
+      "https://api.jobhunttracker.live/api/v1/analytics/behavioral-interview-skill-analysis",
       {
         withCredentials: true,
       }
@@ -19,7 +19,7 @@ const getBehaviorScore = async () => {
 const getCodingScore = async () => {
   const result = await axios
     .get(
-      "http://localhost:4000/api/v1/analytics/coding-interview-skill-analysis",
+      "https://api.jobhunttracker.live/api/v1/analytics/coding-interview-skill-analysis",
       {
         withCredentials: true,
       }
@@ -34,7 +34,7 @@ const getCodingScore = async () => {
 const getSystemDesignScore = async () => {
   const result = await axios
     .get(
-      "http://localhost:4000/api/v1/analytics/system-design-interview-skill-analysis",
+      "https://api.jobhunttracker.live/api/v1/analytics/system-design-interview-skill-analysis",
       {
         withCredentials: true,
       }
@@ -49,9 +49,12 @@ const getSystemDesignScore = async () => {
 
 const getInterviewSuccessRate = async () => {
   const result = await axios
-    .get("http://localhost:4000/api/v1/analytics/interview-success-rate", {
-      withCredentials: true,
-    })
+    .get(
+      "https://api.jobhunttracker.live/api/v1/analytics/interview-success-rate",
+      {
+        withCredentials: true,
+      }
+    )
     .catch((error) => {
       console.log(error);
     });
@@ -63,9 +66,12 @@ const getInterviewSuccessRate = async () => {
 
 const getOfferSuccessRate = async () => {
   const result = await axios
-    .get("http://localhost:4000/api/v1/analytics/offer-success-rate", {
-      withCredentials: true,
-    })
+    .get(
+      "https://api.jobhunttracker.live/api/v1/analytics/offer-success-rate",
+      {
+        withCredentials: true,
+      }
+    )
     .catch((error) => {
       console.log(error);
     });
