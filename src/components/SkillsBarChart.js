@@ -25,10 +25,49 @@ function SkillsBarChart({ info }) {
       ],
     });
   }, [info]);
-
+  const options = {
+    responsive: true,
+    scales: {
+      y: {
+        ticks: {
+          font: function (context) {
+            let width = context.chart.width;
+            let fontsize = Math.round(width / 32);
+            return {
+              size: fontsize,
+            };
+          },
+        },
+      },
+      x: {
+        ticks: {
+          font: function (context) {
+            let width = context.chart.width;
+            let fontsize = Math.round(width / 32);
+            return {
+              size: fontsize,
+            };
+          },
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        labels: {
+          font: function (context) {
+            let width = context.chart.width;
+            let fontsize = Math.round(width / 32);
+            return {
+              size: fontsize,
+            };
+          },
+        },
+      },
+    },
+  };
   return (
     <div>
-      <Bar data={chartData} />
+      <Bar data={chartData} options={options} />
     </div>
   );
 }

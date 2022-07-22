@@ -39,12 +39,32 @@ function SuccessPieChart({
       ],
     });
   }, [chart_title, lable_1, lable_2, value_1, value_2]);
+
+  const options = {
+    plugins: {
+      legend: {
+        labels: {
+          font: function (context) {
+            let width = context.chart.width;
+            let fontsize = Math.round(width / 20);
+            return {
+              size: fontsize,
+            };
+          },
+        },
+      },
+    },
+  };
+
   return (
     <div className="">
-      <h1 className="mt-4 text-white text-left">
+      <h1
+        className="mt-4 text-white text-center lg:text-2xl 
+      xl:text-4xl 2xl:text-6xl"
+      >
         {chart_title}: <span className="text-green-500"> {success_rate}% </span>
       </h1>
-      <Pie data={chartData} />
+      <Pie data={chartData} options={options} />
     </div>
   );
 }

@@ -29,7 +29,7 @@ function NavBar() {
   }, [isLoading, isSuccess, isError]);
 
   return (
-    <div>
+    <nav>
       <div className="my-2  flex justify-end text-xl sm:text-xl md:text-2xl xl:text-3xl 2xl:text-5xl text-white">
         <button
           className="h-auto  px-2 mx-4 border-solid border-2 object-right hover:scale-125"
@@ -42,7 +42,7 @@ function NavBar() {
         Hello {user_name}
       </p>
       <ButtonOptions />
-    </div>
+    </nav>
   );
 }
 

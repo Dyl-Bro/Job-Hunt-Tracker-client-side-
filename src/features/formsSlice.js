@@ -66,4 +66,5 @@ export const {
 } = formsSlice.actions;
 export const selectAddAppIsOpen = (state) => state.forms.addAppIsOpen;
 export const selectUpdateAppIsOpen = (state) => state.forms.UpdateAppIsOpen;
+
 export default formsSlice.reducer;

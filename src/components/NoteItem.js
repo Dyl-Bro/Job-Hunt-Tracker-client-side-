@@ -1,15 +1,20 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { openUpdateInterview } from "../features/formsSlice";
 import { deleteInterview } from "../features/interviewsSlice";
 
 function NoteItem({ interview }) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const updateState = useSelector((state) => state.forms.updateInterviewIsOpen);
 
   const { isSuccess, isError } = useSelector((state) => state.interviews);
   useEffect(() => {
+    if (updateState) {
+      navigate("/update-interview");
+    }
     if (isSuccess) {
       toast.success("Interview Deleted Successfully!");
       localStorage.removeItem("Interview ID");
@@ -18,11 +23,11 @@ function NoteItem({ interview }) {
     if (isError) {
       toast.error("Error with deleting Interview");
     }
-  }, [isError, isSuccess]);
+  }, [isError, isSuccess, updateState]);
 
   const handleEdit = (interview_id) => {
-    localStorage.setItem("InterviewID", interview_id);
-    console.log("Application Interview to be Updated--->" + interview_id);
+    localStorage.setItem("interviewID", interview_id);
+    console.log("Interview to be Updated--->" + interview_id);
     dispatch(openUpdateInterview());
   };
 
@@ -59,6 +64,9 @@ function NoteItem({ interview }) {
                 System Design Performance Score
               </th>
               <th scope="col" className="px-6 py-3">
+                <span className="sr-only">Edit</span>
+              </th>
+              <th scope="col" className="px-6 py-3">
                 <span className="sr-only">Delete</span>
               </th>
             </tr>
@@ -73,6 +81,17 @@ function NoteItem({ interview }) {
               <td className="px-6 py-4">{interview.coding_interview_score}</td>
               <td className="px-6 py-4">
                 {interview.systemDesign_interview_score}
+              </td>
+              <td className="px-6 py-4 text-right">
+                <button
+                  className="
+                            text-black font-bold text-xl 
+                            md:text-2xl 2xl:text-4xl"
+                  type="button"
+                  onClick={() => handleEdit(interview.interview_id)}
+                >
+                  Edit
+                </button>
               </td>
               <td className="px-6 py-4 text-right">
                 <button

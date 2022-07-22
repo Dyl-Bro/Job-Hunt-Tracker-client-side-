@@ -7,9 +7,11 @@ import {
 } from "@heroicons/react/outline";
 import ButtonItem from "./ButtonItem";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function ButtonOptions() {
   const navigate = useNavigate();
+  const interviews = useSelector((state) => state.interviews.interviews);
 
   return (
     <div className="flex flex-grow justify-center space-x-10">
@@ -22,6 +24,7 @@ function ButtonOptions() {
       <button onClick={() => navigate("/view_contacts")}>
         <ButtonItem title="HIRING CONTACTS" Icon={UserGroupIcon} />
       </button>
+
       <button onClick={() => navigate("/view_analytics")}>
         <ButtonItem title="JOB-HUNT ANALYTICS" Icon={ChartBarIcon} />
       </button>

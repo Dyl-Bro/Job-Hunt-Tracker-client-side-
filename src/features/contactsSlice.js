@@ -75,30 +75,38 @@ const initialState = {
   contacts: [],
   isSuccess: false,
   isError: false,
+  isAdded: false,
+  isDeleted: false,
+  isLoading: false,
 };
 
 const contactsSlice = createSlice({
   name: "contacts",
   initialState,
-  reducer: {
+  reducers: {
     reset: (state) => {
       state.isSuccess = false;
       state.isError = false;
+      state.isAdded = false;
+      state.isDeleted = false;
+      state.isLoading = false;
     },
   },
   extraReducers: {
     [createContact.fulfilled]: (state, action) => {
       state.isSuccess = true;
+      state.isAdded = true;
     },
     [getContact.fulfilled]: (state, action) => {
       return [...action.payload];
     },
     [deleteContact.fulfilled]: (state, action) => {
       state.isSuccess = true;
+      state.isDeleted = true;
     },
     [getContacts.fulfilled]: (state, action) => {
       state.contacts = [...action.payload];
-      state.isSucces = true;
+      state.isSuccess = true;
     },
   },
 });

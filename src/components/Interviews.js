@@ -40,7 +40,13 @@ function Interviews() {
       <h1 className="mt-10 text-green-400 text-lg sm:text-xl md:text-2xl 2xl:text-5xl ">
         Number of Interviews: {interviews.length}
       </h1>
-
+      {interviews.length == 0 && (
+        <h1 className=" flex justify-center text-2xl text-white font-bold">
+          You have no interview experience notes recorded. Navigate to your
+          applications page, find the application you would like to add an
+          interview experience note for, and select the 'Add Interview' button.
+        </h1>
+      )}
       {interviews
         .filter((interview) => {
           if (searchInput == "") {

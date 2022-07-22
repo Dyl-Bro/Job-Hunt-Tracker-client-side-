@@ -18,13 +18,6 @@ function Contacts() {
   const onSearchChange = (e) => {
     setSearchInput(e.target.value);
   };
-  if (contacts.length === 0) {
-    return (
-      <h1 className="text-2xl text-white font-bold">
-        You have no Hiring Contacts saved.
-      </h1>
-    );
-  }
   return (
     <div className="mx-3 relative  shadow-md ">
       <NavBar />
@@ -45,7 +38,13 @@ function Contacts() {
       <h1 className="mt-10 text-green-400 text-lg sm:text-xl md:text-2xl 2xl:text-5xl ">
         Number of Contacts: {contacts.length}
       </h1>
-
+      {contacts.length == 0 && (
+        <h1 className=" flex justify-center text-2xl text-white font-bold">
+          You have no hiring contacts saved. Navigate to your applications page
+          find the application you would like to add a hiring contact for, and
+          select the 'Add Hiring Contact' button.
+        </h1>
+      )}
       {contacts
         .filter((contact) => {
           if (searchInput == "") {

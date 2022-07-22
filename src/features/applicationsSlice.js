@@ -89,30 +89,56 @@ const initialState = {
   applications: [],
   isSuccess: false,
   isError: false,
+  isLoading: false,
+  isAdded: false,
+  isDeleted: false,
+  isUpdated: false,
 };
 
 const applicationsSlice = createSlice({
   name: "applications",
   initialState,
-  reducer: {
+  reducers: {
     reset: (state) => {
       state.isSuccess = false;
       state.isError = false;
+      state.isLoading = false;
+      state.isAdded = false;
+      state.isDeleted = false;
+      state.isUpdated = false;
     },
   },
   extraReducers: {
+    [createApplication.pending]: (state, action) => {
+      state.isLoading = true;
+    },
     [createApplication.fulfilled]: (state, action) => {
       state.isSuccess = true;
+      state.isAdded = true;
+      state.isLoading = false;
+    },
+    [getApplications.pending]: (state, action) => {
+      state.isLoading = true;
     },
     [getApplications.fulfilled]: (state, action) => {
       state.applications = [...action.payload];
       state.isSucces = true;
     },
+    [updateApplication.pending]: (state, action) => {
+      state.isLoading = true;
+    },
     [updateApplication.fulfilled]: (state, action) => {
       state.isSuccess = true;
+      state.isUpdated = true;
+      state.isLoading = false;
+    },
+    [deleteApplication.pending]: (state, action) => {
+      state.isLoading = true;
     },
     [deleteApplication.fulfilled]: (state, action) => {
       state.isSuccess = true;
+      state.isDeleted = true;
+      state.isLoading = false;
     },
   },
 });

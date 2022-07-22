@@ -13,7 +13,9 @@ import { toast } from "react-toastify";
 function AppItem({ application }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isSuccess, isError } = useSelector((state) => state.applications);
+  const { isSuccess, isError, isDeleted } = useSelector(
+    (state) => state.applications
+  );
   const updateState = useSelector((state) => state.forms.updateAppIsOpen);
   const newInterviewState = useSelector(
     (state) => state.forms.addInterviewIsOpen
@@ -21,8 +23,6 @@ function AppItem({ application }) {
   const newContactState = useSelector(
     (state) => state.forms.addHiringContactIsOpen
   );
-
-  console.log("update state: " + JSON.stringify(updateState));
 
   useEffect(() => {
     if (updateState == true) {
@@ -34,7 +34,7 @@ function AppItem({ application }) {
     if (newContactState) {
       navigate("/add-hiring-contact");
     }
-    if (isSuccess) {
+    if (isDeleted) {
       toast.success("Application Deleted Successfully!");
       localStorage.removeItem("Application to be Updated");
       window.location.reload();
@@ -42,7 +42,7 @@ function AppItem({ application }) {
     if (isError) {
       toast.error("Error with deleting App");
     }
-  }, [updateState, newInterviewState, newContactState, isSuccess]);
+  }, [updateState, newInterviewState, newContactState, isDeleted]);
 
   const handleEdit = (app_id) => {
     localStorage.setItem("Application to be Updated", app_id);
@@ -66,17 +66,17 @@ function AppItem({ application }) {
   };
 
   return (
-    <div className=" mb-20 min-h-fit  overflow-x-scroll whitespace-nowrap">
+    <div className=" mb-20 min-h-fit  overflow-x-scroll whitespace-nowrap font-mono">
       <div className=" border-solid border-4 border-green-400 flex flex-col items-center">
         <h3 className="mb-10 text-[#98fb98] text-3xl md:text-4xl 2xl:text-7xl p-2">
           {application.company_name}
         </h3>
-        <div className="flex flex-row lg:w-full lg:justify-between ">
+        <div className="flex flex-col items-center sm:flex-row lg:w-full lg:justify-between ">
           <button
             className="
-                    flex items-end space-x-2 
-                    text-base sm:text-xl md:text-2xl 2xl:text-5xl text-[#98fb98] 
-                    hover:cursor-pointer hover:bg-[#98fb98] hover:text-slate-900"
+            flex items-end space-x-2 
+            text-base sm:text-xl md:text-2xl 2xl:text-5xl text-[#98fb98] 
+            hover:cursor-pointer hover:bg-[#98fb98] hover:text-slate-900"
             type="button"
             onClick={() =>
               addInterview(application.app_id, application.company_name)
@@ -87,9 +87,9 @@ function AppItem({ application }) {
           </button>
           <button
             className="
-                    flex items-end space-x-2 px-2 
-                    text-base sm:text-xl md:text-2xl 2xl:text-5xl text-[#98fb98]  
-                    hover:cursor-pointer hover:bg-[#98fb98] hover:text-slate-900"
+            flex items-end space-x-2 px-2 
+            text-base sm:text-xl md:text-2xl 2xl:text-5xl text-[#98fb98]  
+            hover:cursor-pointer hover:bg-[#98fb98] hover:text-slate-900"
             type="button"
             onClick={() =>
               addContact(application.app_id, application.company_name)
@@ -148,8 +148,8 @@ function AppItem({ application }) {
               <td className="px-6 py-4 text-right">
                 <button
                   className="
-                            text-black font-bold text-xl 
-                            md:text-2xl 2xl:text-4xl"
+                  text-black font-bold text-xl 
+                  md:text-2xl 2xl:text-4xl"
                   type="button"
                   onClick={() => handleDelete(application.app_id)}
                 >

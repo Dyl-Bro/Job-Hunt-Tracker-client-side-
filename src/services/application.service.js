@@ -40,6 +40,7 @@ const deleteApp = async () => {
 };
 
 const update = async (data) => {
+  const app_id = localStorage.getItem("Application to be Updated");
   const result = await axios
     .put(`http://localhost:4000/api/v1/applications/${app_id}`, data, {
       withCredentials: true,

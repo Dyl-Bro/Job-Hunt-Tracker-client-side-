@@ -3,14 +3,16 @@ import React, { useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { updateApplication } from "../features/applicationsSlice";
+import { updateApplication, reset } from "../features/applicationsSlice";
 import { toast } from "react-toastify";
 import { closeUpdateApp } from "../features/formsSlice";
 
 function UpdateApp() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isSuccess, isError } = useSelector((state) => state.applications);
+  const { isSuccess, isError, isUpdated } = useSelector(
+    (state) => state.applications
+  );
   const { updateAppIsOpen } = useSelector((state) => state.forms);
 
   useEffect(() => {
@@ -21,13 +23,13 @@ function UpdateApp() {
     if (isError) {
       toast.error("Error occured");
     }
-    if (isSuccess) {
-      toast.success("Application Created Successfully!");
+    if (isUpdated) {
+      toast.success("Application Updated Successfully!");
       localStorage.removeItem("Application to be Updated");
+      dispatch(reset());
       dispatch(closeUpdateApp());
-      navigate("/view_applications");
     }
-  }, [isSuccess, isError, updateAppIsOpen]);
+  }, [isUpdated, isError, updateAppIsOpen, dispatch]);
 
   const initialState = {
     interview_received: "",

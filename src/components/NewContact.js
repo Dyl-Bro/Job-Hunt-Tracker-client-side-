@@ -2,7 +2,7 @@ import { XIcon } from "@heroicons/react/outline";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createContact } from "../features/contactsSlice";
+import { createContact, reset } from "../features/contactsSlice";
 import { toast } from "react-toastify";
 import { closeAddHiringContact } from "../features/formsSlice";
 import Contacts from "./Contacts";
@@ -11,7 +11,7 @@ export default function NewContact() {
   const contactCompanyName = localStorage.getItem("Company Name");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isSuccess, isError } = useSelector((state) => state.contacts);
+  const { isAdded, isError } = useSelector((state) => state.contacts);
   const { addHiringContactIsOpen } = useSelector((state) => state.forms);
   console.log(addHiringContactIsOpen);
   useEffect(() => {
@@ -23,12 +23,14 @@ export default function NewContact() {
     if (isError) {
       toast.error("Error occured");
     }
-    if (isSuccess) {
+    if (isAdded) {
+      toast.success("added successfully");
       localStorage.removeItem("AppID");
       localStorage.removeItem("Company Name");
+      dispatch(reset());
       dispatch(closeAddHiringContact());
     }
-  }, [isSuccess, isError, addHiringContactIsOpen]);
+  }, [isAdded, isError, addHiringContactIsOpen]);
 
   const initialState = {
     first: "",

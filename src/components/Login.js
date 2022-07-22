@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user, isLoading, isSuccess, isError } = useSelector(
+  const { user, isLoading, isLoggedIn, isError } = useSelector(
     (state) => state.auth
   );
 
@@ -17,12 +17,12 @@ function Login() {
       toast.error("Error occured");
       dispatch(reset());
     }
-    if (isSuccess) {
+    if (isLoggedIn) {
       toast.success("Login Successful!");
       navigate("/view_applications");
       dispatch(reset());
     }
-  }, [dispatch, navigate, isLoading, isSuccess, isError]);
+  }, [dispatch, navigate, isLoading, isLoggedIn, isError]);
 
   const initState = {
     email: "",

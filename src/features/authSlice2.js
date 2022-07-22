@@ -48,6 +48,8 @@ const initialState = {
   isLoading: false,
   isSuccess: false,
   isError: false,
+  isLoggedIn: false,
+  isSignedUp: false,
 };
 export const authSlice = createSlice({
   name: "auth",
@@ -57,6 +59,8 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.isSuccess = false;
       state.isError = false;
+      state.isLoggedIn = false;
+      state.isSignedUp = false;
     },
   },
   extraReducers: (builder) => {
@@ -66,6 +70,7 @@ export const authSlice = createSlice({
       })
       .addCase(register.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.isSignedUp = true;
         state.isSuccess = true;
         state.user = action.payload;
       })
@@ -75,6 +80,7 @@ export const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.isLoggedIn = true;
         state.isSuccess = true;
         state.user = action.payload;
       })

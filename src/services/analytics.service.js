@@ -55,7 +55,9 @@ const getInterviewSuccessRate = async () => {
     .catch((error) => {
       console.log(error);
     });
-  console.log("Interview success information--->" + result.data);
+  console.log(
+    "Interview success information--->" + JSON.stringify(result.data)
+  );
   return result.data;
 };
 
@@ -67,7 +69,7 @@ const getOfferSuccessRate = async () => {
     .catch((error) => {
       console.log(error);
     });
-  console.log(result.data);
+  console.log("Offer success information--->" + JSON.stringify(result.data));
   return result.data;
 };
 

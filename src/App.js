@@ -17,6 +17,7 @@ import {
   selectUpdateAppIsOpen,
 } from "./features/formsSlice";
 import UpdateApp from "./components/UpdateApp";
+import InterviewUpdate from "./components/interviewUpdate";
 import NewInterview from "./components/NewInterview";
 import NewContact from "./components/NewContact";
 
@@ -39,11 +40,11 @@ function App() {
           <Route path="/view_analytics" element={<Analytics />} />
           <Route path="/update-application" element={<UpdateApp />} />
           <Route path="/add-interview-note" element={<NewInterview />} />
+          <Route path="/update-interview" element={<InterviewUpdate />} />
           <Route path="/add-hiring-contact" element={<NewContact />} />
         </Routes>
       </div>
 
-      {addAppIsOpen && <AddNew />}
       <ToastContainer />
     </div>
   );

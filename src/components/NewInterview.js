@@ -2,7 +2,7 @@ import { XIcon } from "@heroicons/react/outline";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createInterview } from "../features/interviewsSlice";
+import { createInterview, reset } from "../features/interviewsSlice";
 import { toast } from "react-toastify";
 import { closeAddInterview } from "../features/formsSlice";
 
@@ -10,7 +10,9 @@ export default function NewInterview() {
   const interviewName = localStorage.getItem("Company Name");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isSuccess, isError } = useSelector((state) => state.interviews);
+  const { isAdded, isDeleted, isError } = useSelector(
+    (state) => state.interviews
+  );
   const { addInterviewIsOpen } = useSelector((state) => state.forms);
 
   useEffect(() => {
@@ -21,12 +23,14 @@ export default function NewInterview() {
     }
     if (isError) {
       toast.error("Error occured");
+      dispatch(reset());
     }
-    if (isSuccess) {
-      localStorage.removeItem("AppID");
+    if (isAdded) {
+      toast.success("Interview Added Successfully");
       dispatch(closeAddInterview());
+      dispatch(reset());
     }
-  }, [isSuccess, isError, addInterviewIsOpen]);
+  }, [isAdded, isError, addInterviewIsOpen, dispatch]);
 
   const initialState = {
     positiveNotes: "",
@@ -99,36 +103,42 @@ export default function NewInterview() {
               onChange={handleChange}
             />
             <h1 className="text-[rgb(152,251,152)] text-2xl">
-              Rate your Behavioral Interview Perforance (1-10)
+              Rate your Behavioral Interview Perforance (0-10) if you've yet not
+              reached this portion of the interview, enter 0 and come back later
+              to update this value once you've completed it.
             </h1>
             <input
               className=" text-black rounded-3xl h-14 shadow-inner shadow-slate-700"
               type="text"
               name="behavioralInterviewScore"
               value={interview.behavioralInterviewScore}
-              placeholder="(1-10)"
+              placeholder="(0-10)"
               onChange={handleChange}
             />
             <h1 className="text-[rgb(152,251,152)] text-2xl">
-              Rate your Coding Interview Perforance (1-10)
+              Rate your Coding Interview Perforance (0-10) if you've yet not
+              reached this portion of the interview, enter 0 and come back later
+              to update this value once you've completed it.
             </h1>
             <input
               className=" text-black rounded-3xl h-14 shadow-inner shadow-slate-700"
               type="text"
               name="codingInterviewScore"
               value={interview.codingInterviewScore}
-              placeholder="(1-10)"
+              placeholder="(0-10)"
               onChange={handleChange}
             />
             <h1 className="text-[rgb(152,251,152)] text-2xl">
-              Rate your System Design Interview Perforance (1-10)
+              Rate your System Design Interview Perforance (0-10) if you've yet
+              not reached this portion of the interview, enter 0 and come back
+              later to update this value once you've completed it.
             </h1>
             <input
               className=" text-black rounded-3xl h-14 shadow-inner shadow-slate-700"
               type="text"
               name="systemDesignInterviewScore"
               value={interview.systemDesignInterviewScore}
-              placeholder="(1-10)"
+              placeholder="(0-10)"
               onChange={handleChange}
             />
 

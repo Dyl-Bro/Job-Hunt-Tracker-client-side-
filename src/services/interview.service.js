@@ -42,8 +42,9 @@ const deleteInterview = async () => {
 };
 
 const update = async (data) => {
+  const interview_id = localStorage.getItem("interviewID");
   const result = await axios
-    .put(`http://localhost:4000/api/v1/applications/${app_id}`, data, {
+    .put(`http://localhost:4000/api/v1/interviews/${interview_id}`, data, {
       withCredentials: true,
     })
     .catch((error) => {

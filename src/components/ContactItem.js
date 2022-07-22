@@ -2,22 +2,26 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { deleteContact } from "../features/contactsSlice";
+import { deleteContact, reset, getContacts } from "../features/contactsSlice";
 
 function ContactItem({ contact }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const { isSuccess, isError } = useSelector((state) => state.contacts);
+  const { isSuccess, isError, isDeleted } = useSelector(
+    (state) => state.contacts
+  );
   useEffect(() => {
-    if (isSuccess) {
+    if (isDeleted) {
       toast.success("Contact Deleted Successfully!");
+      dispatch(getContacts());
+      dispatch(reset());
       localStorage.removeItem("Contact ID");
-      window.location.reload();
     }
     if (isError) {
-      toast.error("Error with deleting Contact");
+      toast.error("Error");
     }
-  }, [isError, isSuccess]);
+  }, [isError, isDeleted, dispatch]);
   const handleDelete = (contact_id) => {
     localStorage.setItem("Contact ID", contact_id);
     dispatch(deleteContact());
