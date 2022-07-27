@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { updateInterview } from "../features/interviewsSlice";
+import { updateInterview, reset } from "../features/interviewsSlice";
 import { toast } from "react-toastify";
 import { closeUpdateInterview } from "../features/formsSlice";
 
@@ -26,6 +26,7 @@ export default function InterviewUpdate() {
     if (isUpdated) {
       toast.success("Interview updated successfully");
       localStorage.removeItem("interviewID");
+      dispatch(reset());
       dispatch(closeUpdateInterview());
       navigate("/view_interview_notes");
     }

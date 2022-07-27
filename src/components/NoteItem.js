@@ -3,21 +3,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { openUpdateInterview } from "../features/formsSlice";
-import { deleteInterview } from "../features/interviewsSlice";
+import { deleteInterview, reset } from "../features/interviewsSlice";
 
 function NoteItem({ interview }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const updateState = useSelector((state) => state.forms.updateInterviewIsOpen);
 
-  const { isSuccess, isError } = useSelector((state) => state.interviews);
+  const { isSuccess, isDeleted, isError } = useSelector(
+    (state) => state.interviews
+  );
   useEffect(() => {
     if (updateState) {
       navigate("/update-interview");
     }
-    if (isSuccess) {
+    if (isDeleted) {
       toast.success("Interview Deleted Successfully!");
       localStorage.removeItem("Interview ID");
+      dispatch(reset());
       window.location.reload();
     }
     if (isError) {
