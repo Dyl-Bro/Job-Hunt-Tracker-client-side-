@@ -90,8 +90,8 @@ function Analytics() {
                 lable_1="Apps with interviews NOT received"
                 lable_2="Apps with interviews received"
                 value_1={0}
-                value_2={interviewRate[1].interview_COUNT}
-                success_rate={interviewRate[1].INTERVIEW_INVITATION_PERCENTAGE}
+                value_2={interviewRate[0].interview_COUNT}
+                success_rate={interviewRate[0].INTERVIEW_INVITATION_PERCENTAGE}
               />
             )}
           {interviewRate.length == 1 &&
