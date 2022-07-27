@@ -19,7 +19,10 @@ function AddNew() {
       dispatch(reset());
     }
     if (isSuccess) {
+      toast.success("successful");
+
       dispatch(reset());
+      window.location.reload();
       dispatch(closeAddApp());
     }
   }, [isSuccess, isError]);
