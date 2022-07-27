@@ -111,7 +111,7 @@ const initialState = {
 const interviewsSlice = createSlice({
   name: "interviews",
   initialState,
-  reducer: {
+  reducers: {
     reset: (state) => {
       state.isLoading = false;
       state.isSuccess = false;

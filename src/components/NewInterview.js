@@ -50,7 +50,6 @@ export default function NewInterview() {
     systemDesignInterviewScore,
     companyName,
   } = interview;
-  console.log("Interview.companyName: " + interview.companyName);
 
   const handleChange = (event) => {
     const name = event.target.name;
