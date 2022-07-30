@@ -1,3 +1,7 @@
+Developer Job Hunt Tracker
+
+
+
 Client side of Job Hunt Tracking App https://jonhunttracker.live, the application made for developers on the job hunt. 
 
 Created With: 
